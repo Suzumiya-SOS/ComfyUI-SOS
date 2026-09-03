@@ -4,13 +4,40 @@ Docker Compose 不会自动下载自定义节点或模型。以下命令均在�
 
 ## 自定义节点
 
-- [ ] [comfyui_controlnet_aux](https://github.com/Fannovel16/comfyui_controlnet_aux)
-- [ ] [ComfyUI-Autocomplete-Plus](https://github.com/newtextdoc1111/ComfyUI-Autocomplete-Plus)
-- [ ] [ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)
-- [ ] [ComfyUI-See-through](https://github.com/jtydhr88/ComfyUI-See-through)
-- [ ] [ComfyUI-segment-anything-2](https://github.com/kijai/ComfyUI-segment-anything-2)
-- [ ] [ComfyUI-WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper)
-- [ ] [rgthree-comfy](https://github.com/rgthree/rgthree-comfy)
+保存的工作流会用到下列扩展。`custom_nodes/` 已被 `.gitignore` 忽略，需要在本机单独克隆。
+
+### 原清单
+
+- [x] [comfyui_controlnet_aux](https://github.com/Fannovel16/comfyui_controlnet_aux)
+- [x] [ComfyUI-Autocomplete-Plus](https://github.com/newtextdoc1111/ComfyUI-Autocomplete-Plus)
+- [x] [ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)
+- [x] [ComfyUI-See-through](https://github.com/jtydhr88/ComfyUI-See-through)
+- [x] [ComfyUI-segment-anything-2](https://github.com/kijai/ComfyUI-segment-anything-2)
+- [x] [ComfyUI-WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper)
+- [x] [rgthree-comfy](https://github.com/rgthree/rgthree-comfy)
+
+### 本地已有、清单未记
+
+- [x] [ComfyUI-DaSiWa-Nodes](https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes)
+- [x] [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)
+- [x] [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo)
+- [x] [ComfyUI-VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite)
+- [x] [comfyui-WhiteRabbit](https://github.com/Artificial-Sweetener/comfyui-WhiteRabbit)
+
+### 按工作流补齐
+
+- [x] [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
+- [x] [ComfyUI-Easy-Use](https://github.com/yolain/ComfyUI-Easy-Use)
+- [x] [ComfyUI-FBCNN](https://github.com/Miosp/ComfyUI-FBCNN)
+- [x] [ComfyUI-Image-Saver](https://github.com/alexopus/ComfyUI-Image-Saver)
+- [x] [ComfyUI-Impact-Pack](https://github.com/ltdrdata/ComfyUI-Impact-Pack)
+- [x] [ComfyUI-Impact-Subpack](https://github.com/ltdrdata/ComfyUI-Impact-Subpack)
+- [x] [ComfyUI-Lora-Manager](https://github.com/willmiao/ComfyUI-Lora-Manager)
+- [x] [ComfyUI-ppm](https://github.com/pamparamm/ComfyUI-ppm)
+- [x] [ComfyUI-QwenVL](https://github.com/1038lab/ComfyUI-QwenVL)
+- [x] [ComfyUI_IPAdapter_plus](https://github.com/cubiq/ComfyUI_IPAdapter_plus)
+- [x] [ComfyUI_UltimateSDUpscale](https://github.com/ssitu/ComfyUI_UltimateSDUpscale)
+- [x] [z-tipo-extension](https://github.com/KohakuBlueleaf/z-tipo-extension)
 
 PowerShell 一键克隆命令（已存在的目录会跳过）：
 
@@ -22,12 +49,29 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
   "https://github.com/jtydhr88/ComfyUI-See-through.git",
   "https://github.com/kijai/ComfyUI-segment-anything-2.git",
   "https://github.com/kijai/ComfyUI-WanVideoWrapper.git",
-  "https://github.com/rgthree/rgthree-comfy.git"
+  "https://github.com/rgthree/rgthree-comfy.git",
+  "https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes.git",
+  "https://github.com/city96/ComfyUI-GGUF.git",
+  "https://github.com/Lightricks/ComfyUI-LTXVideo.git",
+  "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git",
+  "https://github.com/Artificial-Sweetener/comfyui-WhiteRabbit.git",
+  "https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git",
+  "https://github.com/yolain/ComfyUI-Easy-Use.git",
+  "https://github.com/Miosp/ComfyUI-FBCNN.git",
+  "https://github.com/alexopus/ComfyUI-Image-Saver.git",
+  "https://github.com/ltdrdata/ComfyUI-Impact-Pack.git",
+  "https://github.com/ltdrdata/ComfyUI-Impact-Subpack.git",
+  "https://github.com/willmiao/ComfyUI-Lora-Manager.git",
+  "https://github.com/pamparamm/ComfyUI-ppm.git",
+  "https://github.com/1038lab/ComfyUI-QwenVL.git",
+  "https://github.com/cubiq/ComfyUI_IPAdapter_plus.git",
+  "https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git",
+  "https://github.com/KohakuBlueleaf/z-tipo-extension.git"
 ) | ForEach-Object {
   $name = [IO.Path]::GetFileNameWithoutExtension($_)
   $destination = Join-Path "custom_nodes" $name
   if (-not (Test-Path $destination)) {
-    git clone $_ $destination
+    git clone --recurse-submodules $_ $destination
   }
 }
 ```
