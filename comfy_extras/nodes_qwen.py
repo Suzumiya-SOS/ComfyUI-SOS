@@ -12,7 +12,8 @@ class TextEncodeQwenImageEdit(io.ComfyNode):
     def define_schema(cls):
         return io.Schema(
             node_id="TextEncodeQwenImageEdit",
-            category="advanced/conditioning",
+            display_name="Text Encode Qwen Image Edit",
+            category="model/conditioning/qwen image",
             inputs=[
                 io.Clip.Input("clip"),
                 io.String.Input("prompt", multiline=True, dynamic_prompts=True),
@@ -55,7 +56,8 @@ class TextEncodeQwenImageEditPlus(io.ComfyNode):
     def define_schema(cls):
         return io.Schema(
             node_id="TextEncodeQwenImageEditPlus",
-            category="advanced/conditioning",
+            display_name="Text Encode Qwen Image Edit Plus",
+            category="model/conditioning/qwen image",
             inputs=[
                 io.Clip.Input("clip"),
                 io.String.Input("prompt", multiline=True, dynamic_prompts=True),
