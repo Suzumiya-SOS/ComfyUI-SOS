@@ -2,42 +2,42 @@
 
 Docker Compose 不会自动下载自定义节点或模型。以下命令均在仓库根目录执行。
 
+清单中的勾选状态以实际磁盘内容为准，未安装的项标为 `[ ]`。
+
 ## 自定义节点
 
 保存的工作流会用到下列扩展。`custom_nodes/` 已被 `.gitignore` 忽略，需要在本机单独克隆。
 
-### 原清单
+### 已安装（20 个）
 
 - [x] [comfyui_controlnet_aux](https://github.com/Fannovel16/comfyui_controlnet_aux)
 - [x] [ComfyUI-Autocomplete-Plus](https://github.com/newtextdoc1111/ComfyUI-Autocomplete-Plus)
-- [x] [ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)
-- [x] [ComfyUI-See-through](https://github.com/jtydhr88/ComfyUI-See-through)
-- [x] [ComfyUI-segment-anything-2](https://github.com/kijai/ComfyUI-segment-anything-2)
-- [x] [ComfyUI-WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper)
-- [x] [rgthree-comfy](https://github.com/rgthree/rgthree-comfy)
-
-### 本地已有、清单未记
-
-- [x] [ComfyUI-DaSiWa-Nodes](https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes)
-- [x] [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)
-- [x] [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo)
-- [x] [ComfyUI-VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite)
-- [x] [comfyui-WhiteRabbit](https://github.com/Artificial-Sweetener/comfyui-WhiteRabbit)
-
-### 按工作流补齐
-
 - [x] [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
 - [x] [ComfyUI-Easy-Use](https://github.com/yolain/ComfyUI-Easy-Use)
 - [x] [ComfyUI-FBCNN](https://github.com/Miosp/ComfyUI-FBCNN)
+- [x] [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)
 - [x] [ComfyUI-Image-Saver](https://github.com/alexopus/ComfyUI-Image-Saver)
 - [x] [ComfyUI-Impact-Pack](https://github.com/ltdrdata/ComfyUI-Impact-Pack)
 - [x] [ComfyUI-Impact-Subpack](https://github.com/ltdrdata/ComfyUI-Impact-Subpack)
+- [x] [ComfyUI_IPAdapter_plus](https://github.com/cubiq/ComfyUI_IPAdapter_plus)
+- [x] [ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)
+- [x] [ComfyUI-layerdiffuse](https://github.com/huchenlei/ComfyUI-layerdiffuse)
 - [x] [ComfyUI-Lora-Manager](https://github.com/willmiao/ComfyUI-Lora-Manager)
 - [x] [ComfyUI-ppm](https://github.com/pamparamm/ComfyUI-ppm)
 - [x] [ComfyUI-QwenVL](https://github.com/1038lab/ComfyUI-QwenVL)
-- [x] [ComfyUI_IPAdapter_plus](https://github.com/cubiq/ComfyUI_IPAdapter_plus)
+- [x] [ComfyUI-See-through](https://github.com/jtydhr88/ComfyUI-See-through)
 - [x] [ComfyUI_UltimateSDUpscale](https://github.com/ssitu/ComfyUI_UltimateSDUpscale)
+- [x] [comfyui-WhiteRabbit](https://github.com/Artificial-Sweetener/comfyui-WhiteRabbit)
+- [x] [rgthree-comfy](https://github.com/rgthree/rgthree-comfy)
 - [x] [z-tipo-extension](https://github.com/KohakuBlueleaf/z-tipo-extension)
+
+### 未安装（5 个）
+
+- [ ] [ComfyUI-DaSiWa-Nodes](https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes)
+- [ ] [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo)
+- [ ] [ComfyUI-segment-anything-2](https://github.com/kijai/ComfyUI-segment-anything-2)
+- [ ] [ComfyUI-VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite)
+- [ ] [ComfyUI-WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper)
 
 PowerShell 一键克隆命令（已存在的目录会跳过）：
 
@@ -45,28 +45,29 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
 @(
   "https://github.com/Fannovel16/comfyui_controlnet_aux.git",
   "https://github.com/newtextdoc1111/ComfyUI-Autocomplete-Plus.git",
-  "https://github.com/kijai/ComfyUI-KJNodes.git",
-  "https://github.com/jtydhr88/ComfyUI-See-through.git",
-  "https://github.com/kijai/ComfyUI-segment-anything-2.git",
-  "https://github.com/kijai/ComfyUI-WanVideoWrapper.git",
-  "https://github.com/rgthree/rgthree-comfy.git",
-  "https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes.git",
-  "https://github.com/city96/ComfyUI-GGUF.git",
-  "https://github.com/Lightricks/ComfyUI-LTXVideo.git",
-  "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git",
-  "https://github.com/Artificial-Sweetener/comfyui-WhiteRabbit.git",
   "https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git",
   "https://github.com/yolain/ComfyUI-Easy-Use.git",
   "https://github.com/Miosp/ComfyUI-FBCNN.git",
+  "https://github.com/city96/ComfyUI-GGUF.git",
   "https://github.com/alexopus/ComfyUI-Image-Saver.git",
   "https://github.com/ltdrdata/ComfyUI-Impact-Pack.git",
   "https://github.com/ltdrdata/ComfyUI-Impact-Subpack.git",
+  "https://github.com/cubiq/ComfyUI_IPAdapter_plus.git",
+  "https://github.com/kijai/ComfyUI-KJNodes.git",
+  "https://github.com/huchenlei/ComfyUI-layerdiffuse.git",
   "https://github.com/willmiao/ComfyUI-Lora-Manager.git",
   "https://github.com/pamparamm/ComfyUI-ppm.git",
   "https://github.com/1038lab/ComfyUI-QwenVL.git",
-  "https://github.com/cubiq/ComfyUI_IPAdapter_plus.git",
+  "https://github.com/jtydhr88/ComfyUI-See-through.git",
   "https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git",
-  "https://github.com/KohakuBlueleaf/z-tipo-extension.git"
+  "https://github.com/Artificial-Sweetener/comfyui-WhiteRabbit.git",
+  "https://github.com/rgthree/rgthree-comfy.git",
+  "https://github.com/KohakuBlueleaf/z-tipo-extension.git",
+  "https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes.git",
+  "https://github.com/Lightricks/ComfyUI-LTXVideo.git",
+  "https://github.com/kijai/ComfyUI-segment-anything-2.git",
+  "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git",
+  "https://github.com/kijai/ComfyUI-WanVideoWrapper.git"
 ) | ForEach-Object {
   $name = [IO.Path]::GetFileNameWithoutExtension($_)
   $destination = Join-Path "custom_nodes" $name
@@ -76,11 +77,36 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
 }
 ```
 
+`ComfyUI-layerdiffuse` 需要额外补丁才能在 ComfyUI V3 下生效：上游权重以 LoRA 配对
+（`::lora::0/1`）格式保存，而 V3 已移除该 patch 类型，需在 `layered_diffusion.py` 的
+`pad_diff_weight()` 中把配对折叠成完整权重差。
+
 ## 模型
 
 以下路径均相对于 `models/` 目录。当前模型以单独文件分发，不克隆整个 Hugging Face 仓库。
 
-### Z-Image
+### 已下载
+
+| 完成 | 模型 | 保存路径 | 体积 |
+| --- | --- | --- | --- |
+| [x] | `illustriousXL_v01.safetensors` | `checkpoints/illustriousXL_v01.safetensors` | 6.46 GB |
+| [x] | `waiIllustriousSDXL_v170.safetensors` | `checkpoints/waiIllustriousSDXL_v170.safetensors` | 6.46 GB |
+| [x] | `layer_xl_transparent_conv.safetensors` | `layer_model/layer_xl_transparent_conv.safetensors` | 3.37 GB |
+| [x] | `TIPO-500M-ft_TIPO-500M-ft-F16.gguf` | `kgen/TIPO-500M-ft_TIPO-500M-ft-F16.gguf` | 970 MB |
+| [x] | `layer_xl_transparent_attn.safetensors` | `layer_model/layer_xl_transparent_attn.safetensors` | 709 MB |
+| [x] | `parsing_lip.onnx` | `onnx/parsing_lip.onnx` | 255 MB |
+| [x] | `vae_transparent_decoder.safetensors` | `layer_model/vae_transparent_decoder.safetensors` | 199 MB |
+| [x] | `deeplabv3p-resnet50-human.onnx` | `onnx/human-parts/deeplabv3p-resnet50-human.onnx` | 45 MB |
+| [x] | `RealESRGAN_x4plus_anime_6B.pth` | `upscale_models/RealESRGAN_x4plus_anime_6B.pth` | 17 MB |
+
+`illustriousXL_v01` 与 `waiIllustriousSDXL_v170` 被现有 txt2img 工作流引用；
+`layer_model/` 三个权重与 `onnx/parsing_lip.onnx` 供透明背景相关流程使用。
+
+### 待下载
+
+以下模型尚未下载，保留下载地址备用。
+
+#### Z-Image
 
 | 完成 | 模型 | 保存路径 | 来源 |
 | --- | --- | --- | --- |
@@ -89,7 +115,7 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
 | [ ] | `ae.safetensors` | `vae/ae.safetensors` | [Download](https://huggingface.co/Comfy-Org/z_image_turbo/resolve/main/split_files/vae/ae.safetensors) |
 | [ ] | `Z-Image-Turbo-Fun-Controlnet-Union.safetensors` | `model_patches/Z-Image-Turbo-Fun-Controlnet-Union.safetensors` | [Download](https://huggingface.co/alibaba-pai/Z-Image-Turbo-Fun-Controlnet-Union/resolve/main/Z-Image-Turbo-Fun-Controlnet-Union.safetensors) |
 
-### FLUX.2
+#### FLUX.2
 
 | 完成 | 模型 | 保存路径 | 来源 |
 | --- | --- | --- | --- |
@@ -98,7 +124,7 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
 | [ ] | `flux2-vae.safetensors` | `vae/flux2-vae.safetensors` | [Download](https://huggingface.co/Comfy-Org/flux2-dev/resolve/main/split_files/vae/flux2-vae.safetensors) |
 | [ ] | `full_encoder_small_decoder.safetensors` | `vae/full_encoder_small_decoder.safetensors` | [Download](https://huggingface.co/black-forest-labs/FLUX.2-small-decoder/resolve/main/full_encoder_small_decoder.safetensors) |
 
-### Wan
+#### Wan
 
 | 完成 | 模型 | 保存路径 | 来源 |
 | --- | --- | --- | --- |
@@ -108,17 +134,10 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
 | [ ] | `WanAnimate_relight_lora_fp16.safetensors` | `loras/WanAnimate_relight_lora_fp16.safetensors` | [Download](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/LoRAs/Wan22_relight/WanAnimate_relight_lora_fp16.safetensors) |
 | [ ] | `sam2_hiera_base_plus.safetensors` | `sam2/sam2_hiera_base_plus.safetensors` | [Download](https://huggingface.co/Kijai/sam2-safetensors/resolve/main/sam2_hiera_base_plus.safetensors) |
 
-### Anima
+#### Anima
 
 | 完成 | 模型 | 保存路径 | 来源 |
 | --- | --- | --- | --- |
 | [ ] | `waiANIMA_v10Base10.safetensors` | `diffusion_models/waiANIMA_v10Base10.safetensors` | 待补充链接 |
 | [ ] | `waiANIMA_v10Base10_txt.safetensors` | `text_encoders/waiANIMA_v10Base10_txt.safetensors` | 待补充链接 |
 | [ ] | `qwen_image_vae.safetensors` | `vae/qwen_image_vae.safetensors` | [Download](https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/vae/qwen_image_vae.safetensors) |
-
-### Illustrious
-
-| 完成 | 模型 | 保存路径 | 来源 |
-| --- | --- | --- | --- |
-| [ ] | `illustriousXL_v01.safetensors` | `checkpoints/illustriousXL_v01.safetensors` | 待补充链接 |
-| [ ] | `waiIllustriousSDXL_v170.safetensors` | `checkpoints/waiIllustriousSDXL_v170.safetensors` | 待补充链接 |
