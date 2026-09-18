@@ -47,12 +47,19 @@ Docker Compose 不会自动下载自定义节点或模型。以下命令均在�
 
 ### 已知失效
 
-`ComfyUI-layerdiffuse` 的注意力权重 `layer_xl_transparent_attn.safetensors` 全部 1120 个
-张量以 `::lora::` 配对格式保存，而 ComfyUI 的 patch 解析只识别 `diff`、`set`、
-`model_as_lora` 三种类型。因此该权重会被整体跳过，实测权重扰动为 0，即注意力层
-完全不生效，透明生成仅剩 `layer_xl_transparent_conv` 一路。
+`ComfyUI-layerdiffuse` 在 ComfyUI V3 下有两处失效，均源自上游未修复的问题。上游最新提交
+为 `b4f6a9e`，`main` 是唯一分支，重新克隆得到的代码与此处记录的完全一致。
 
-节点保持上游原版，未做本地修改。若需要恢复注意力层效果，可应用备份的补丁：
+**一、节点直接崩溃。** `LayeredDiffusionDecodeRGBA` 调用
+`JoinImageWithAlpha().join_image_with_alpha()`，而该方法在 V3 中已被 `execute()` 取代，
+节点一旦执行就抛出 `AttributeError`。上游 issue #136 自 2026-04 起保持开启，三个修复
+PR（#132、#135、#137）均未合并。
+
+**二、注意力权重被丢弃。** `layer_xl_transparent_attn.safetensors` 的 1120 个张量全部以
+`::lora::` 配对格式保存，而 ComfyUI 的 patch 解析只识别 `diff`、`set`、`model_as_lora`
+三种类型，实测权重扰动为 0，注意力层完全不生效。
+
+当前节点保持上游原版。备份的补丁可同时解决这两处问题：
 
 ```bash
 git -C custom_nodes/ComfyUI-layerdiffuse am ~/0001-Fold-LoRA-paired-weights-into-diff-patches-and-fix-a.patch
