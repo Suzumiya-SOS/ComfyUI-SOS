@@ -43,23 +43,23 @@ Docker Compose 不会自动下载自定义节点或模型。以下命令均在�
 - `ComfyUI-LTXVideo`：`kornia` 0.8.3 移除了 `kornia.core.pad` 别名，
   `pyramid_blending.py` 改为直接使用已导入的 `torch.nn.functional.pad`。
 
-补丁未推送到上游仓库，重新克隆后需要重新应用。
+- `ComfyUI-layerdiffuse`：上游在 ComfyUI V3 下有两处失效。上游最新提交为 `b4f6a9e`，
+  `main` 是唯一分支，重新克隆得到的代码与此处记录的完全一致。
 
-### 已知失效
+  **一、节点直接崩溃。** `LayeredDiffusionDecodeRGBA` 调用
+  `JoinImageWithAlpha().join_image_with_alpha()`，而该方法在 V3 中已被 `execute()` 取代
+  （ComfyUI `6732014a0`，2025-10-08），节点一旦执行就抛出 `AttributeError`。上游 issue
+  #136 自 2026-04 起保持开启，三个修复 PR（#132、#135、#137）均未合并。
 
-`ComfyUI-layerdiffuse` 在 ComfyUI V3 下有两处失效，均源自上游未修复的问题。上游最新提交
-为 `b4f6a9e`，`main` 是唯一分支，重新克隆得到的代码与此处记录的完全一致。
+  **二、注意力权重被丢弃。** `layer_xl_transparent_attn.safetensors` 的 1120 个张量全部以
+  `::lora::` 配对格式保存，而 ComfyUI 的 patch 解析只识别 `diff`、`set`、`model_as_lora`
+  三种类型，实测权重扰动为 0，注意力层完全不生效。
 
-**一、节点直接崩溃。** `LayeredDiffusionDecodeRGBA` 调用
-`JoinImageWithAlpha().join_image_with_alpha()`，而该方法在 V3 中已被 `execute()` 取代，
-节点一旦执行就抛出 `AttributeError`。上游 issue #136 自 2026-04 起保持开启，三个修复
-PR（#132、#135、#137）均未合并。
+  补丁已在仓库内本地提交（`4dc25f8`）：把 LoRA 配对在 `pad_diff_weight()` 中折叠成完整
+  权重差，并改用 `torch.cat` 直接拼接 alpha 通道。alpha 取解码器原始通道而非上游的
+  `1.0 - mask`，实测两者正确率分别为 2/6 与 0/6。
 
-**二、注意力权重被丢弃。** `layer_xl_transparent_attn.safetensors` 的 1120 个张量全部以
-`::lora::` 配对格式保存，而 ComfyUI 的 patch 解析只识别 `diff`、`set`、`model_as_lora`
-三种类型，实测权重扰动为 0，注意力层完全不生效。
-
-当前节点保持上游原版。备份的补丁可同时解决这两处问题：
+补丁未推送到上游仓库，重新克隆后需要重新应用：
 
 ```bash
 git -C custom_nodes/ComfyUI-layerdiffuse am ~/0001-Fold-LoRA-paired-weights-into-diff-patches-and-fix-a.patch
@@ -102,10 +102,6 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
   }
 }
 ```
-
-`ComfyUI-layerdiffuse` 需要额外补丁才能在 ComfyUI V3 下生效：上游权重以 LoRA 配对
-（`::lora::0/1`）格式保存，而 V3 已移除该 patch 类型，需在 `layered_diffusion.py` 的
-`pad_diff_weight()` 中把配对折叠成完整权重差。
 
 ## 模型
 
