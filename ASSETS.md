@@ -8,11 +8,12 @@ Docker Compose 不会自动下载自定义节点或模型。以下命令均在�
 
 保存的工作流会用到下列扩展。`custom_nodes/` 已被 `.gitignore` 忽略，需要在本机单独克隆。
 
-### 已安装（20 个）
+### 已安装（25 个）
 
 - [x] [comfyui_controlnet_aux](https://github.com/Fannovel16/comfyui_controlnet_aux)
 - [x] [ComfyUI-Autocomplete-Plus](https://github.com/newtextdoc1111/ComfyUI-Autocomplete-Plus)
 - [x] [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
+- [x] [ComfyUI-DaSiWa-Nodes](https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes)
 - [x] [ComfyUI-Easy-Use](https://github.com/yolain/ComfyUI-Easy-Use)
 - [x] [ComfyUI-FBCNN](https://github.com/Miosp/ComfyUI-FBCNN)
 - [x] [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)
@@ -23,21 +24,28 @@ Docker Compose 不会自动下载自定义节点或模型。以下命令均在�
 - [x] [ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)
 - [x] [ComfyUI-layerdiffuse](https://github.com/huchenlei/ComfyUI-layerdiffuse)
 - [x] [ComfyUI-Lora-Manager](https://github.com/willmiao/ComfyUI-Lora-Manager)
+- [x] [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo)
 - [x] [ComfyUI-ppm](https://github.com/pamparamm/ComfyUI-ppm)
 - [x] [ComfyUI-QwenVL](https://github.com/1038lab/ComfyUI-QwenVL)
 - [x] [ComfyUI-See-through](https://github.com/jtydhr88/ComfyUI-See-through)
+- [x] [ComfyUI-segment-anything-2](https://github.com/kijai/ComfyUI-segment-anything-2)
 - [x] [ComfyUI_UltimateSDUpscale](https://github.com/ssitu/ComfyUI_UltimateSDUpscale)
+- [x] [ComfyUI-VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite)
+- [x] [ComfyUI-WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper)
 - [x] [comfyui-WhiteRabbit](https://github.com/Artificial-Sweetener/comfyui-WhiteRabbit)
 - [x] [rgthree-comfy](https://github.com/rgthree/rgthree-comfy)
 - [x] [z-tipo-extension](https://github.com/KohakuBlueleaf/z-tipo-extension)
 
-### 未安装（5 个）
+### 需要补丁
 
-- [ ] [ComfyUI-DaSiWa-Nodes](https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes)
-- [ ] [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo)
-- [ ] [ComfyUI-segment-anything-2](https://github.com/kijai/ComfyUI-segment-anything-2)
-- [ ] [ComfyUI-VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite)
-- [ ] [ComfyUI-WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper)
+以下扩展在 ComfyUI V3 或当前依赖版本下需要本地补丁，补丁已在各自仓库内本地提交：
+
+- `ComfyUI-layerdiffuse`：上游权重以 LoRA 配对（`::lora::0/1`）格式保存，而 V3 已移除该
+  patch 类型，需在 `layered_diffusion.py` 的 `pad_diff_weight()` 中把配对折叠成完整权重差。
+- `ComfyUI-LTXVideo`：`kornia` 0.8.3 移除了 `kornia.core.pad` 别名，
+  `pyramid_blending.py` 改为直接使用已导入的 `torch.nn.functional.pad`。
+
+补丁未推送到上游仓库，重新克隆后需要重新应用。
 
 PowerShell 一键克隆命令（已存在的目录会跳过）：
 
@@ -46,6 +54,7 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
   "https://github.com/Fannovel16/comfyui_controlnet_aux.git",
   "https://github.com/newtextdoc1111/ComfyUI-Autocomplete-Plus.git",
   "https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git",
+  "https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes.git",
   "https://github.com/yolain/ComfyUI-Easy-Use.git",
   "https://github.com/Miosp/ComfyUI-FBCNN.git",
   "https://github.com/city96/ComfyUI-GGUF.git",
@@ -56,18 +65,17 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
   "https://github.com/kijai/ComfyUI-KJNodes.git",
   "https://github.com/huchenlei/ComfyUI-layerdiffuse.git",
   "https://github.com/willmiao/ComfyUI-Lora-Manager.git",
+  "https://github.com/Lightricks/ComfyUI-LTXVideo.git",
   "https://github.com/pamparamm/ComfyUI-ppm.git",
   "https://github.com/1038lab/ComfyUI-QwenVL.git",
   "https://github.com/jtydhr88/ComfyUI-See-through.git",
+  "https://github.com/kijai/ComfyUI-segment-anything-2.git",
   "https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git",
+  "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git",
+  "https://github.com/kijai/ComfyUI-WanVideoWrapper.git",
   "https://github.com/Artificial-Sweetener/comfyui-WhiteRabbit.git",
   "https://github.com/rgthree/rgthree-comfy.git",
-  "https://github.com/KohakuBlueleaf/z-tipo-extension.git",
-  "https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes.git",
-  "https://github.com/Lightricks/ComfyUI-LTXVideo.git",
-  "https://github.com/kijai/ComfyUI-segment-anything-2.git",
-  "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git",
-  "https://github.com/kijai/ComfyUI-WanVideoWrapper.git"
+  "https://github.com/KohakuBlueleaf/z-tipo-extension.git"
 ) | ForEach-Object {
   $name = [IO.Path]::GetFileNameWithoutExtension($_)
   $destination = Join-Path "custom_nodes" $name
