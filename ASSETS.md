@@ -40,12 +40,23 @@ Docker Compose 不会自动下载自定义节点或模型。以下命令均在�
 
 以下扩展在 ComfyUI V3 或当前依赖版本下需要本地补丁，补丁已在各自仓库内本地提交：
 
-- `ComfyUI-layerdiffuse`：上游权重以 LoRA 配对（`::lora::0/1`）格式保存，而 V3 已移除该
-  patch 类型，需在 `layered_diffusion.py` 的 `pad_diff_weight()` 中把配对折叠成完整权重差。
 - `ComfyUI-LTXVideo`：`kornia` 0.8.3 移除了 `kornia.core.pad` 别名，
   `pyramid_blending.py` 改为直接使用已导入的 `torch.nn.functional.pad`。
 
 补丁未推送到上游仓库，重新克隆后需要重新应用。
+
+### 已知失效
+
+`ComfyUI-layerdiffuse` 的注意力权重 `layer_xl_transparent_attn.safetensors` 全部 1120 个
+张量以 `::lora::` 配对格式保存，而 ComfyUI 的 patch 解析只识别 `diff`、`set`、
+`model_as_lora` 三种类型。因此该权重会被整体跳过，实测权重扰动为 0，即注意力层
+完全不生效，透明生成仅剩 `layer_xl_transparent_conv` 一路。
+
+节点保持上游原版，未做本地修改。若需要恢复注意力层效果，可应用备份的补丁：
+
+```bash
+git -C custom_nodes/ComfyUI-layerdiffuse am ~/0001-Fold-LoRA-paired-weights-into-diff-patches-and-fix-a.patch
+```
 
 PowerShell 一键克隆命令（已存在的目录会跳过）：
 
