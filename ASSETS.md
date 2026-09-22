@@ -158,8 +158,21 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
 
 #### Anima
 
+官方示例图包含可运行工作流，已保存为
+`user/default/workflows/anima_official_example.png`。适配 Aesthetic v1.1 的纯 JSON
+工作流位于 `user/default/workflows/Anima Aesthetic v1.1.json`。
+
 | 完成 | 模型 | 保存路径 | 来源 |
 | --- | --- | --- | --- |
+| [x] | `anima-aesthetic-v1.1.safetensors` | `diffusion_models/anima-aesthetic-v1.1.safetensors` | [Download](https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/diffusion_models/anima-aesthetic-v1.1.safetensors) |
+| [x] | `qwen_3_06b_base.safetensors` | `text_encoders/qwen_3_06b_base.safetensors` | [Download](https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/text_encoders/qwen_3_06b_base.safetensors) |
 | [ ] | `waiANIMA_v10Base10.safetensors` | `diffusion_models/waiANIMA_v10Base10.safetensors` | 待补充链接 |
 | [ ] | `waiANIMA_v10Base10_txt.safetensors` | `text_encoders/waiANIMA_v10Base10_txt.safetensors` | 待补充链接 |
-| [ ] | `qwen_image_vae.safetensors` | `vae/qwen_image_vae.safetensors` | [Download](https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/vae/qwen_image_vae.safetensors) |
+| [x] | `qwen_image_vae.safetensors` | `vae/qwen_image_vae.safetensors` | [Download](https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/vae/qwen_image_vae.safetensors) |
+
+### Illustrious
+
+| 完成 | 模型 | 保存路径 | 来源 |
+| --- | --- | --- | --- |
+| [ ] | `illustriousXL_v01.safetensors` | `checkpoints/illustriousXL_v01.safetensors` | 待补充链接 |
+| [ ] | `waiIllustriousSDXL_v170.safetensors` | `checkpoints/waiIllustriousSDXL_v170.safetensors` | 待补充链接 |
