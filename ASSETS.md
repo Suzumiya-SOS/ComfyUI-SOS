@@ -8,12 +8,11 @@ Docker Compose 不会自动下载自定义节点或模型。以下命令均在�
 
 保存的工作流会用到下列扩展。`custom_nodes/` 已被 `.gitignore` 忽略，需要在本机单独克隆。
 
-### 已安装（25 个）
+### 已安装（22 个）
 
 - [x] [comfyui_controlnet_aux](https://github.com/Fannovel16/comfyui_controlnet_aux)
 - [x] [ComfyUI-Autocomplete-Plus](https://github.com/newtextdoc1111/ComfyUI-Autocomplete-Plus)
 - [x] [ComfyUI-Custom-Scripts](https://github.com/pythongosssss/ComfyUI-Custom-Scripts)
-- [x] [ComfyUI-DaSiWa-Nodes](https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes)
 - [x] [ComfyUI-Easy-Use](https://github.com/yolain/ComfyUI-Easy-Use)
 - [x] [ComfyUI-FBCNN](https://github.com/Miosp/ComfyUI-FBCNN)
 - [x] [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF)
@@ -24,14 +23,12 @@ Docker Compose 不会自动下载自定义节点或模型。以下命令均在�
 - [x] [ComfyUI-KJNodes](https://github.com/kijai/ComfyUI-KJNodes)
 - [x] [ComfyUI-layerdiffuse](https://github.com/huchenlei/ComfyUI-layerdiffuse)
 - [x] [ComfyUI-Lora-Manager](https://github.com/willmiao/ComfyUI-Lora-Manager)
-- [x] [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo)
 - [x] [ComfyUI-ppm](https://github.com/pamparamm/ComfyUI-ppm)
 - [x] [ComfyUI-QwenVL](https://github.com/1038lab/ComfyUI-QwenVL)
 - [x] [ComfyUI-See-through](https://github.com/jtydhr88/ComfyUI-See-through)
 - [x] [ComfyUI-segment-anything-2](https://github.com/kijai/ComfyUI-segment-anything-2)
 - [x] [ComfyUI_UltimateSDUpscale](https://github.com/ssitu/ComfyUI_UltimateSDUpscale)
 - [x] [ComfyUI-VideoHelperSuite](https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite)
-- [x] [ComfyUI-WanVideoWrapper](https://github.com/kijai/ComfyUI-WanVideoWrapper)
 - [x] [comfyui-WhiteRabbit](https://github.com/Artificial-Sweetener/comfyui-WhiteRabbit)
 - [x] [rgthree-comfy](https://github.com/rgthree/rgthree-comfy)
 - [x] [z-tipo-extension](https://github.com/KohakuBlueleaf/z-tipo-extension)
@@ -39,9 +36,6 @@ Docker Compose 不会自动下载自定义节点或模型。以下命令均在�
 ### 需要补丁
 
 以下扩展在 ComfyUI V3 或当前依赖版本下需要本地补丁，补丁已在各自仓库内本地提交：
-
-- `ComfyUI-LTXVideo`：`kornia` 0.8.3 移除了 `kornia.core.pad` 别名，
-  `pyramid_blending.py` 改为直接使用已导入的 `torch.nn.functional.pad`。
 
 - `ComfyUI-layerdiffuse`：上游在 ComfyUI V3 下有两处失效。上游最新提交为 `b4f6a9e`，
   `main` 是唯一分支，重新克隆得到的代码与此处记录的完全一致。
@@ -72,7 +66,6 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
   "https://github.com/Fannovel16/comfyui_controlnet_aux.git",
   "https://github.com/newtextdoc1111/ComfyUI-Autocomplete-Plus.git",
   "https://github.com/pythongosssss/ComfyUI-Custom-Scripts.git",
-  "https://github.com/darksidewalker/ComfyUI-DaSiWa-Nodes.git",
   "https://github.com/yolain/ComfyUI-Easy-Use.git",
   "https://github.com/Miosp/ComfyUI-FBCNN.git",
   "https://github.com/city96/ComfyUI-GGUF.git",
@@ -83,14 +76,12 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
   "https://github.com/kijai/ComfyUI-KJNodes.git",
   "https://github.com/huchenlei/ComfyUI-layerdiffuse.git",
   "https://github.com/willmiao/ComfyUI-Lora-Manager.git",
-  "https://github.com/Lightricks/ComfyUI-LTXVideo.git",
   "https://github.com/pamparamm/ComfyUI-ppm.git",
   "https://github.com/1038lab/ComfyUI-QwenVL.git",
   "https://github.com/jtydhr88/ComfyUI-See-through.git",
   "https://github.com/kijai/ComfyUI-segment-anything-2.git",
   "https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git",
   "https://github.com/Kosinkadink/ComfyUI-VideoHelperSuite.git",
-  "https://github.com/kijai/ComfyUI-WanVideoWrapper.git",
   "https://github.com/Artificial-Sweetener/comfyui-WhiteRabbit.git",
   "https://github.com/rgthree/rgthree-comfy.git",
   "https://github.com/KohakuBlueleaf/z-tipo-extension.git"
@@ -154,7 +145,7 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
 | [ ] | `clip_vision_h.safetensors` | `clip_vision/clip_vision_h.safetensors` | [Download](https://huggingface.co/Comfy-Org/Wan_2.1_ComfyUI_repackaged/resolve/main/split_files/clip_vision/clip_vision_h.safetensors) |
 | [ ] | `wan_2.1_vae.safetensors` | `vae/wan_2.1_vae.safetensors` | [Download](https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged/resolve/main/split_files/vae/wan_2.1_vae.safetensors) |
 | [ ] | `WanAnimate_relight_lora_fp16.safetensors` | `loras/WanAnimate_relight_lora_fp16.safetensors` | [Download](https://huggingface.co/Kijai/WanVideo_comfy/resolve/main/LoRAs/Wan22_relight/WanAnimate_relight_lora_fp16.safetensors) |
-| [ ] | `sam2_hiera_base_plus.safetensors` | `sam2/sam2_hiera_base_plus.safetensors` | [Download](https://huggingface.co/Kijai/sam2-safetensors/resolve/main/sam2_hiera_base_plus.safetensors) |
+| [x] | `sam2_hiera_base_plus.safetensors` | `sam2/sam2_hiera_base_plus.safetensors` | [Download](https://huggingface.co/Kijai/sam2-safetensors/resolve/main/sam2_hiera_base_plus.safetensors) |
 
 #### Anima
 
@@ -166,9 +157,24 @@ PowerShell 一键克隆命令（已存在的目录会跳过）：
 | --- | --- | --- | --- |
 | [x] | `anima-aesthetic-v1.1.safetensors` | `diffusion_models/anima-aesthetic-v1.1.safetensors` | [Download](https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/diffusion_models/anima-aesthetic-v1.1.safetensors) |
 | [x] | `qwen_3_06b_base.safetensors` | `text_encoders/qwen_3_06b_base.safetensors` | [Download](https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/text_encoders/qwen_3_06b_base.safetensors) |
+| [x] | `qwen_image_vae.safetensors` | `vae/qwen_image_vae.safetensors` | [Download](https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/vae/qwen_image_vae.safetensors) |
 | [ ] | `waiANIMA_v10Base10.safetensors` | `diffusion_models/waiANIMA_v10Base10.safetensors` | 待补充链接 |
 | [ ] | `waiANIMA_v10Base10_txt.safetensors` | `text_encoders/waiANIMA_v10Base10_txt.safetensors` | 待补充链接 |
-| [x] | `qwen_image_vae.safetensors` | `vae/qwen_image_vae.safetensors` | [Download](https://huggingface.co/circlestone-labs/Anima/resolve/main/split_files/vae/qwen_image_vae.safetensors) |
+
+### Qwen Image Edit 2511
+
+面向 RTX 5070 12GB：GGUF Q4_K_M + Lightning 4-step。工作流：`user/default/workflows/Qwen Image Edit 2511 GGUF Q4 Lightning.json`。
+
+```powershell
+python scripts/download_qwen_edit_2511.py
+```
+
+| 完成 | 模型 | 保存路径 | 来源 |
+| --- | --- | --- | --- |
+| [x] | `qwen-image-edit-2511-Q4_K_M.gguf` | `unet/qwen-image-edit-2511-Q4_K_M.gguf` | [Download](https://huggingface.co/unsloth/Qwen-Image-Edit-2511-GGUF/resolve/main/qwen-image-edit-2511-Q4_K_M.gguf) |
+| [x] | `qwen_2.5_vl_7b_fp8_scaled.safetensors` | `text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors` | [Download](https://huggingface.co/Comfy-Org/Qwen-Image_ComfyUI/resolve/main/split_files/text_encoders/qwen_2.5_vl_7b_fp8_scaled.safetensors) |
+| [x] | `qwen_image_vae.safetensors` | `vae/qwen_image_vae.safetensors` | 与 Anima 共用 |
+| [x] | `Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors` | `loras/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors` | [Download](https://huggingface.co/lightx2v/Qwen-Image-Edit-2511-Lightning/resolve/main/Qwen-Image-Edit-2511-Lightning-4steps-V1.0-bf16.safetensors) |
 
 ### Illustrious
 
