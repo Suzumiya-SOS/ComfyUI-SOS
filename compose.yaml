@@ -2,12 +2,13 @@ name: comfyui-master
 
 services:
   comfyui:
-    image: comfyui-sos-comfyui:master-20261022
+    image: "${COMFYUI_IMAGE:-comfyui-sos-comfyui:master-extensions-20261022}"
     container_name: comfyui-master
     build:
       context: .
+      dockerfile: Dockerfile.extensions
       args:
-        COMFYUI_REVISION: 7a28332047b6af638dc6c7f72ef3481a718769fd
+        CORE_IMAGE: comfyui-sos-comfyui:master-20261022
     init: true
     read_only: true
     tmpfs:

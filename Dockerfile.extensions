@@ -1,0 +1,49 @@
+ARG CORE_IMAGE=comfyui-sos-comfyui:master-20261022
+FROM ${CORE_IMAGE}
+
+USER root
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends build-essential pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+USER comfy
+COPY --chown=comfy:comfy extension-dependencies /opt/comfyui-build/extensions
+ENV PIP_CONSTRAINT=/opt/comfyui-build/extensions/core-constraints.txt \
+    UV_CONSTRAINT=/opt/comfyui-build/extensions/core-constraints.txt
+
+RUN python /opt/comfyui-build/extensions/verify_core.py \
+    && python -m uv pip install --python /opt/venv/bin/python \
+        --constraint /opt/comfyui-build/extensions/core-constraints.txt \
+        --requirement /opt/comfyui-build/extensions/requirements.lock \
+        --no-build-isolation-package groundingdino-py \
+    && python /opt/comfyui-build/extensions/verify_core.py
+
+RUN python -m pip check \
+    && python -m pip freeze > /opt/comfyui-build/extensions.freeze.txt
+
+COPY --chown=comfy:comfy requirements.extensions-git.lock /opt/comfyui-build/requirements.extensions-git.lock
+RUN SAM2_BUILD_CUDA=0 SAM2_BUILD_ALLOW_ERRORS=0 \
+    python -m uv pip install --python /opt/venv/bin/python \
+        --constraint /opt/comfyui-build/extensions/core-constraints.txt \
+        --requirement /opt/comfyui-build/requirements.extensions-git.lock \
+        --no-build-isolation-package sam-2 \
+        --no-build-isolation-package ffmpy \
+        --no-build-isolation-package cstr \
+    && python /opt/comfyui-build/extensions/verify_core.py \
+    && python -m pip check \
+    && python -m pip freeze > /opt/comfyui-build/extensions.freeze.txt
+
+COPY --chown=comfy:comfy requirements.extensions-extra.lock /opt/comfyui-build/requirements.extensions-extra.lock
+RUN python -m uv pip install --python /opt/venv/bin/python \
+        --constraint /opt/comfyui-build/extensions/core-constraints.txt \
+        --requirement /opt/comfyui-build/requirements.extensions-extra.lock \
+    && python /opt/comfyui-build/extensions/verify_core.py \
+    && python -m pip check \
+    && python -m pip freeze > /opt/comfyui-build/extensions.freeze.txt
+
+# Fill节点的系统OpenGL分发库；仅补齐动态库，不假定无头渲染已验收。
+USER root
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libopengl0 \
+    && rm -rf /var/lib/apt/lists/*
+USER comfy

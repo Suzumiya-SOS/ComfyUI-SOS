@@ -1,0 +1,5 @@
+# 既有扩展正式声明的源码依赖：已审阅并固定提交，不运行模型下载。
+# img2texture会关闭全局Pillow保护，暂不安装；SAM-2使用原作明确的无CUDA扩展模式。
+cstr @ git+https://github.com/ltdrdata/cstr.git@0520c29a18a7a869a6e5983861d6f7a4c86f8e9b
+ffmpy @ git+https://github.com/ltdrdata/ffmpy.git@f000737698b387ffaeab7cd871b0e9185811230d
+SAM-2 @ git+https://github.com/facebookresearch/sam2.git@2b90b9f5ceec907a1c18123530e92e794ad901a4
