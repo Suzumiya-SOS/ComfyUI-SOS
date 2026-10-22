@@ -33,7 +33,7 @@ curl --fail http://127.0.0.1:8189/system_stats
 
 ## 原入口切换和回滚
 
-**尚未执行切换。** 当前23个旧扩展加载失败，关键H3/VHS/分层等流程未恢复。即使新核心和GPU/网页/API验收通过，也需要用户明确接受这些限制、授权替换原入口后才执行下面命令。
+**尚未执行切换。** 源码更新后当前24个扩展加载失败，关键H3/VHS/分层等流程未恢复。即使新核心和GPU/网页/API验收通过，也需要用户明确接受这些限制、授权替换原入口后才执行下面命令。
 
 获授权后，先确认旧服务队列为空；保留原容器，不执行 down 或删除镜像，并在停写后备份完整user及ACL/xattrs。
 
@@ -59,8 +59,34 @@ curl --fail http://127.0.0.1:8188/system_stats
 
 - 新核心0.42.0、frontend1.57.1、Torch2.14.1+cu130，原生Manager4.2.2版本接口可访问；`pip check`通过。
 - 小矩阵运算、FP16/BF16 SDPA、TorchVision CUDA NMS通过；Kitchen CUDA后端可用。
-- 迁入user和原样旧扩展后，网页入口/hashed JS、API和64×64无模型PNG图执行通过，服务健康、重启0。
-- 44活动扩展中旧Manager由原生版本排除；43尝试加载，23失败、20未标失败，最终1649节点。失败多为缺包及只读写入限制，并非已证明都是新版核心API不兼容；没有处理这些兼容项。
-- H3 T8采样器、VHS、See-through、BiRefNet、Fill拼图等关键节点仍缺失，原工作流并未全部恢复；没有运行真实大模型、付费API、视频或画质测试。
+- 迁入user并完成下述扩展源码更新后，网页入口/hashed JS、API和64×64无模型PNG图执行通过；仅重启新8189加载新版，服务健康、自动重启计数0。
+- 44活动扩展中旧Manager由原生版本排除；43尝试加载，24失败、19未标失败，最终1611节点（更新前为23失败、1649节点）。失败多为缺包及只读写入限制，并非已证明都是新版核心API不兼容；没有处理这些兼容项。
+- H3 T8采样器、VHS、See-through、Fill拼图等关键节点仍缺失；新版RMBG已注册BiRefNetRMBG，但尚未运行模型验证。原工作流并未全部恢复；没有运行真实大模型、付费API、视频或画质测试。
 - 原生Manager日志误报未安装Torch，实际导入和GPU测试通过，未因此重装Torch。
 - 本机完整静态/运行报告与测试记录位于 `/opt/maoning/Reference/comfy-master-rebuild-20261022/`，私密日志和user备份不进入Git或镜像。
+
+## 2026-10-22：旧扩展源码更新
+
+用户要求更新迁入扩展，范围仍限独立master/8189。先完整备份扩展（含Git、配置、未跟踪/ignored内容与链接）和用户资产，在隔离副本fetch并验证快进，再重放本地修改；只有成功项才替换到新树，原件另存私密保留目录。没有修改核心、安装/降级运行依赖、下载模型或更新旧8188。
+
+11个扩展已快进到核验时的远端版本：
+
+| 扩展 | 新SHA前缀 |
+| --- | --- |
+| ComfyUI-Easy-Use | `b0b47ca13721` |
+| ComfyUI-KJNodes | `f4bae1f9960e` |
+| ComfyUI-LTXVideo | `220e1d45aa04` |
+| comfyui-minimax-h3-audio-T8 | `e576eba8433e` |
+| ComfyUI-OpenPose-Studio | `2075fbe59b88` |
+| ComfyUI-RMBG | `a66a5e641a54` |
+| comfyui_controlnet_aux | `a587a4c15945` |
+| ComfyUI_LayerStyle | `51977b27869a` |
+| ComfyUI_RH_OpenAPI | `7f1160f5a66e` |
+| LanPaint | `2d7912f9a5ef` |
+| rgthree-comfy | `d7297b42f0fa` |
+
+另外29个源码仓库已是对应远端最新（包括PerfectPixel真实源），4个无Git目录保留，旧Manager保留停用。记录共45条，包含44活动目录及PerfectPixel包装背后的1个真实源码仓库，不是45个活动扩展。LTX、RH以及其他定制配置未丢弃；没有向第三方扩展远端推送。
+
+节点净减38：新版LTX需要尚未安装的`colour`，77个节点未注册；RMBG从9增至44，KJNodes从261增至265，核心节点无变动。缺包不等于新核心API不兼容，也不能用源码更新代替补包或工作流验收。此次仍未运行H3等真实模型、视频/音频、生成质量或付费API测试。
+
+更新清单、备份校验、保留核验及实际加载报告位于本机 `/opt/maoning/Reference/comfy-extension-update-20261022/`。临时无网审计容器已停止；新8189运行、旧8188入口及容器保持原样。
